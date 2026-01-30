@@ -55,6 +55,26 @@ public class IterativeDFS {
             }
         }
 
+        public void BFSiterative(int start_vertex){
+            Queue<Integer> queue = new LinkedList<>();
+            HashSet<Integer> visited = new HashSet<>();
+
+            queue.add(start_vertex);
+            visited.add(start_vertex);
+
+            while(!queue.isEmpty()){
+                int current_vertex = queue.poll();
+                System.out.println(current_vertex);
+
+                for(int neighbour : ListMap.getOrDefault(current_vertex, Collections.emptyList())){
+                    if(!visited.contains(neighbour)){
+                        queue.add(neighbour);
+                        visited.add(neighbour);
+                    }
+                }
+            }
+        }
+
 
         public void removeEdge(int source, int destination){
             ListMap.get(source).remove((Integer) destination);
@@ -109,6 +129,9 @@ public class IterativeDFS {
         System.out.println("RECURSIVE DFS APPROACH : ");
 
         adj.DFS(3);
+
+        System.out.println("ITERATIVE BFS APPROACH : ");
+        adj.BFSiterative(1);
 
         System.out.println("AFTER REMOVING ELEMENTS : ");
         adj.removeEdge(1,3);
